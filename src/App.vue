@@ -6,7 +6,6 @@
       :clipped="clipped"
       v-model="drawer"
       enable-resize-watcher
-      fixed
       app
     >
       <v-list>
@@ -29,6 +28,7 @@
       :clipped-left="clipped"
       dense
       dark
+      fixed
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn icon v-if="drawer" @click.stop="miniVariant = !miniVariant">
@@ -38,7 +38,9 @@
       <v-toolbar-title v-text="title"></v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <div class="scroll-container">
+        <router-view/>
+      </div>
     </v-content>
     <v-footer :fixed="fixed" app dark>
       <span>&copy; Firvain 2018</span>
@@ -65,3 +67,16 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+html {
+  overflow-y: hidden;
+}
+.content {
+  max-height: 100vh;
+}
+.scroll-container {
+  height: 100%;
+  overflow-y: hidden;
+  backface-visibility: hidden;
+}
+</style>
