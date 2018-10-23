@@ -35,6 +35,7 @@
         <v-icon v-html="miniVariant ? 'mdi-chevron-right' : 'mdi-chevron-left'"></v-icon>
       </v-btn>
       <v-spacer></v-spacer>
+      <v-btn flat to="/signUp">Sign Up</v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
     </v-toolbar>
     <v-content>
