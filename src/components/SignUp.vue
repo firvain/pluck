@@ -61,7 +61,12 @@ export default {
     },
     signUp() {
       if (this.$refs.form.validate()) {
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+          .then(user => console.log(user))
+          .catch((error) => {
+            const errorMessage = error.message;
+            this.$router.push({ name: 'error', params: { errorMessage } });
+          });
       }
     },
   },

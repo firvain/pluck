@@ -2,7 +2,7 @@
 import * as firebase from 'firebase';
 import config from '../config/firebase-config';
 
-console.log(config);
+alert('config');
 firebase.initializeApp(config);
 
 export default firebase;

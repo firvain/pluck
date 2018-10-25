@@ -31,5 +31,11 @@ export default new Router({
       name: 'signup',
       component: () => import('./components/SignUp.vue'),
     },
+    {
+      path: '/error',
+      name: 'error',
+      component: () => import('./components/Error.vue'),
+      props: true,
+    },
   ],
 });

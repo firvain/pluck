@@ -11,10 +11,26 @@
             </small>
           </footer>
         </blockquote>
+        <p>{{ logged }}</p>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
 </template>
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  name: 'Home',
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState('user', [
+      'logged',
+    ]),
+  },
+};
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

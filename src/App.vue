@@ -31,11 +31,19 @@
       fixed
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+
       <v-btn icon v-if="drawer" @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'mdi-chevron-right' : 'mdi-chevron-left'"></v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn flat to="/signUp">Sign Up</v-btn>
+      <v-toolbar-items>
+        <v-btn icon to="/">
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+        <v-btn v-if="!logged" flat to="/signIn">Sign In</v-btn>
+        <v-btn v-else @click="signout">Sign Out</v-btn>
+        <v-btn v-if="!logged" flat dark class="grey lighten-1" to="/signUp">Sign Up</v-btn>
+      </v-toolbar-items>
       <v-toolbar-title v-text="title"></v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -50,6 +58,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import firebase from './Firebase';
 
 export default {
   name: 'App',
@@ -65,6 +75,23 @@ export default {
       miniVariant: false,
       title: 'Pluck',
     };
+  },
+  computed: {
+    ...mapState('user', [
+      'logged',
+    ]),
+  },
+  methods: {
+    signout() {
+      firebase.auth().signOut()
+        .then(() => {
+          alert('Signed Out');
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          this.$router.push({ name: 'error', params: { errorMessage } });
+        });
+    },
   },
 };
 </script>
